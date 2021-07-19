@@ -1,5 +1,6 @@
+//import type { Config } from "@jest/types";
 //this array will contain all the todo list items
-let todoItems = [];
+let todoItems: any[] = [];
 function listAllTodos() {
 	for (var i = 0; i < todoItems.length; i++) {
 		console.log(todoItems[i].id + " " + todoItems[i].text);
@@ -9,7 +10,7 @@ function listAllTodos() {
 /* This function will create a new todo object based on the
 text that was entered in the text input, and push it into
 the `todoItems` array*/
-function addTodo(text, dueAtstr) {
+function addTodo(text: any, dueAtstr: string) {
 	let todo = {
 		text, //key and value both are text
 		checked: false,
@@ -48,7 +49,7 @@ function uncompletedList() {
 	}
 }
 //for user to write the text of the item they want to remove since they dont know abou the id
-function findTodoByText(text) {
+function findTodoByText(text: string) {
 	// find the text that matches the text  inside the array
 	const findTodoWithText = todoItems.findIndex(
 		(todoInsideArray) => todoInsideArray.text == text
@@ -58,14 +59,14 @@ function findTodoByText(text) {
 
 //remove todo by text
 
-function removeTodoByText(text) {
+function removeTodoByText(text: string) {
 	return removeTodo(findTodoByText(text));
 }
 
-function removeTodo(itemsToRemove) {
+function removeTodo(itemsToRemove: any[number]) {
 	// find the index of the todo with the id you are looking for
 	const indexOfTodoToDelete = todoItems.indexOf(
-		(todoInArray) => todoInArray.id === itemsToRemove.id
+		(todoInArray: { id: any }) => todoInArray.id === itemsToRemove.id
 	);
 	// remove that todo
 	todoItems.splice(indexOfTodoToDelete, 1); // delete the todo
@@ -75,7 +76,7 @@ function clearAll() {
 	return (todoItems.length = 0);
 }
 
-module.exports = {
+export {
 	addTodo,
 	listAllTodos,
 	todoItems,

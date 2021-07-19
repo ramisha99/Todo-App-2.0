@@ -7,15 +7,21 @@
   "version": "1.0.0",
   "main": "todo_final.js",
   "devDependencies": {
+    "@types/jest": "^26.0.24",
     "jest": "^27.0.6",
-    "prettier": "^2.3.2"
+    "prettier": "^2.3.2",
+    "typescript": "^4.3.5"
   },
   "scripts": {
     "test": "jest --coverage",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "start": "node dist/todo_final.js",
+    "build": "tsc -p .",
+    "dev": "nodemon ./src/todo_final.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": ""
+  
 }
