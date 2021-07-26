@@ -12,7 +12,7 @@ beforeEach(() => {
 	clearAll();
 });
 
-///* Runs after each test */
+// Runs after each test
 const originalLog = console.log;
 afterEach(() => {
 	console.log = originalLog;
@@ -34,23 +34,24 @@ test("remove an item", () => {
 			text: "berry",
 			checked: true,
 			id: 1300,
-			createdAt: "3/20/2021",
-			dueAt: "4/20/2021",
+			createdAt: new Date("3/20/2021"),
+			dueAt: new Date("4/20/2021"),
 		},
 
 		{
 			text: "ramisha",
 			checked: false,
 			id: 1400,
-			createdAt: "3/20/2021",
-			dueAt: "4/20/2021",
+			createdAt: new Date("3/20/2021"),
+			dueAt: new Date("4/20/2021"),
 		}
 	);
 
 	removeTodo(todoItems[0]); //testing if we can remove the 1st item or  not
 	console.log(todoItems);
 	expect(todoItems.length).toEqual(1);
-	expect(todoItems[0].text).toEqual("berry");
+	console.log(todoItems);
+	expect(todoItems[0].text).toEqual("ramisha");
 });
 
 //test for clearAll todos
@@ -60,15 +61,15 @@ test("clearing the todoItems array", () => {
 			text: "chocolate",
 			checked: true,
 			id: 1900,
-			createdAt: "3/20/2021",
-			dueAt: "4/20/2021",
+			createdAt: new Date("3/20/2021"),
+			dueAt: new Date("4/20/2021"),
 		},
 		{
 			text: "vnc",
 			checked: false,
 			id: 1600,
-			createdAt: "3/20/2021",
-			dueAt: "4/20/2021",
+			createdAt: new Date("3/20/2021"),
+			dueAt: new Date("4/20/2021"),
 		}
 	);
 	clearAll();
@@ -85,22 +86,22 @@ test("view the complete list of todos", () => {
 			text: "apple",
 			checked: true,
 			id: 1500,
-			createdAt: "6/20/2021",
-			dueAt: "12/20/2021",
+			createdAt: new Date("6/20/2021"),
+			dueAt: new Date("12/20/2021"),
 		},
 		{
 			text: "dog",
 			checked: false,
 			id: 1600,
-			createdAt: "8/20/2021",
-			dueAt: "11/20/2021",
+			createdAt: new Date("8/20/2021"),
+			dueAt: new Date("11/20/2021"),
 		},
 		{
 			text: "cat",
 			checked: false,
 			id: 1800,
-			createdAt: "10/20/2021",
-			dueAt: "7/20/2021",
+			createdAt: new Date("10/20/2021"),
+			dueAt: new Date("7/20/2021"),
 		}
 	);
 
@@ -116,22 +117,22 @@ test("view the uncomplete list of todos", () => {
 			text: "mango",
 			checked: true,
 			id: 1900,
-			createdAt: "6/1/2020",
-			dueAt: "12/2/2020",
+			createdAt: new Date("6/1/2020"),
+			dueAt: new Date("12/2/2020"),
 		},
 		{
 			text: "banana",
 			checked: true,
 			id: 1200,
-			createdAt: "2/20/2020",
-			dueAt: "10/20/2020",
+			createdAt: new Date("2/20/2020"),
+			dueAt: new Date("10/20/2020"),
 		},
 		{
 			text: "bangladesh",
 			checked: false,
 			id: 2000,
-			createdAt: "3/20/2020",
-			dueAt: "4/20/2020",
+			createdAt: new Date("3/20/2020"),
+			dueAt: new Date("4/20/2020"),
 		}
 	);
 

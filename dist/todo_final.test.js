@@ -1,16 +1,8 @@
-"use strict";
-const test1 = require("./todo_final");
-const addTodo = test1.addTodo;
-const clearAll = test1.clearAll;
-const removeTodo = test1.removeTodo;
-const completeList = test1.completeList;
-const uncompletedList = test1.uncompletedList;
-const todoItems = test1.todoItems;
+import { addTodo, clearAll, removeTodo, completeList, uncompletedList, todoItems, } from "./todo_final";
 /* Runs before each test */
 beforeEach(() => {
     clearAll();
 });
-console.log(test1);
 ///* Runs after each test */
 const originalLog = console.log;
 afterEach(() => {
@@ -20,7 +12,8 @@ afterEach(() => {
 test("add a todo item to the list of todoItems", () => {
     addTodo("buy apple", "6/30/21");
     console.log(todoItems);
-    expect(todoItems.length).toEqual(1); //length of one item that is being newly added
+    const length = todoItems.length;
+    expect(length).toEqual(1); //length of one item that is being newly added
     expect(todoItems[0].text).toEqual("buy apple"); //index[0] since it is a test
 });
 //test for remove item

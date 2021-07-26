@@ -1,6 +1,6 @@
-"use strict";
-//this array will contain all the todo list items
+//import type { Config } from "@jest/types";
 let todoItems = [];
+//this array will contain all the todo list items
 function listAllTodos() {
     for (var i = 0; i < todoItems.length; i++) {
         console.log(todoItems[i].id + " " + todoItems[i].text);
@@ -60,14 +60,5 @@ function removeTodo(itemsToRemove) {
 function clearAll() {
     return (todoItems.length = 0);
 }
-module.exports = {
-    addTodo,
-    listAllTodos,
-    todoItems,
-    completeList,
-    uncompletedList,
-    removeTodo,
-    clearAll,
-    testItems,
-};
+export { addTodo, listAllTodos, todoItems, completeList, uncompletedList, removeTodo, clearAll, testItems, };
 //# sourceMappingURL=todo_final.js.map

@@ -1,29 +1,37 @@
-//import type { Config } from "@jest/types";
+type TodoItem = {
+	checked: Boolean;
+	createdAt: Date; // Class Date as type, it will be the current date when the todo is created
+	dueAt: Date; //string to date
+	id: number;
+	text: string;
+};
+let todoItems: TodoItem[] = [];
 //this array will contain all the todo list items
-let todoItems: any[] = [];
 function listAllTodos() {
-	for (var i = 0; i < todoItems.length; i++) {
-		console.log(todoItems[i].id + " " + todoItems[i].text);
+	for (const item of todoItems) {
+		console.log(item.id + " " + item.text);
 	}
 }
 
-/* This function will create a new todo object based on the
-text that was entered in the text input, and push it into
-the `todoItems` array*/
+/*
+ *This function will create a new todo object based on the
+ *text that was entered in the text input, and push it into
+ *the `todoItems` array
+ */
 function addTodo(text: any, dueAtstr: string) {
 	let todo = {
-		text, //key and value both are text
 		checked: false,
-		id: Date.now(), //The static Date.now() method returns the number of milliseconds elapsed since January 1, 1970
 		createdAt: new Date(), //it will be the current date when the todo is created
 		dueAt: new Date(dueAtstr), //string to date
+		id: Date.now(), //The static Date.now() method returns the number of milliseconds elapsed since January 1, 1970
+		text, //key and value both are text
 	};
 
 	todoItems.push(todo);
 	return todo.id;
 }
 //getter
-function testItems() {
+function getTestItems() {
 	return todoItems;
 }
 
@@ -32,40 +40,41 @@ function testItems() {
 function completeList() {
 	//filter iterate through each item of the array
 
-	let completedItems = todoItems.filter((item) => item.checked === true);
-	for (var i = 0; i < completedItems.length; i++) {
-		console.log(completedItems[i].id + " " + completedItems[i].text);
+	const completedItems = todoItems.filter((item) => item.checked === true);
+	for (const item of completedItems) {
+		console.log(item.id + " " + item.text);
 	}
 }
 
 //list uncompleted todos
 function uncompletedList() {
-	/// filter is an array method that returns the position of an element
-	// in the array
+	/*
+	 *filter is an array method that returns the position of an element in the array
+	 */
 
 	const uncompletedItems = todoItems.filter((item) => item.checked === false);
-	for (var i = 0; i < uncompletedItems.length; i++) {
-		console.log(uncompletedItems[i].id + " " + uncompletedItems[i].text);
+	for (const item of uncompletedItems) {
+		console.log(item.id + " " + item.text);
 	}
 }
 //for user to write the text of the item they want to remove since they dont know abou the id
 function findTodoByText(text: string) {
 	// find the text that matches the text  inside the array
 	const findTodoWithText = todoItems.findIndex(
-		(todoInsideArray) => todoInsideArray.text == text
+		(todoInsideArray) => todoInsideArray.text === text
 	);
 	return todoItems[findTodoWithText]; //return the item not the text itself
 }
 
-//remove todo by text
+// remove todo by text
 
 function removeTodoByText(text: string) {
-	return removeTodo(findTodoByText(text));
+	removeTodo(findTodoByText(text));
 }
 
 function removeTodo(itemsToRemove: any[number]) {
-	// find the index of the todo with the id you are looking for
-	const indexOfTodoToDelete = todoItems.indexOf(
+	// find the index of the todo with the id you are looking for and return the item not the index itself
+	const indexOfTodoToDelete = todoItems.findIndex(
 		(todoInArray: { id: any }) => todoInArray.id === itemsToRemove.id
 	);
 	// remove that todo
@@ -73,7 +82,7 @@ function removeTodo(itemsToRemove: any[number]) {
 }
 
 function clearAll() {
-	return (todoItems.length = 0);
+	todoItems.length = 0;
 }
 
 export {
@@ -84,5 +93,5 @@ export {
 	uncompletedList,
 	removeTodo,
 	clearAll,
-	testItems,
+	getTestItems as testItems,
 };
