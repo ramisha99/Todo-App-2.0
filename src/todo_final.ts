@@ -6,7 +6,7 @@ type TodoItem = {
 	text: string;
 };
 let todoItems: TodoItem[] = [];
-//this array will contain all the todo list items
+// this array will contain all the todo list items
 function listAllTodos() {
 	for (const item of todoItems) {
 		console.log(item.id + " " + item.text);
@@ -14,9 +14,9 @@ function listAllTodos() {
 }
 
 /*
- *This function will create a new todo object based on the
- *text that was entered in the text input, and push it into
- *the `todoItems` array
+ * This function will create a new todo object based on the
+ * text that was entered in the text input, and push it into
+ * the `todoItems` array
  */
 function addTodo(text: any, dueAtstr: string) {
 	let todo = {
@@ -35,10 +35,10 @@ function getTestItems() {
 	return todoItems;
 }
 
-//list completed task
+// list completed task
 
 function completeList() {
-	//filter iterate through each item of the array
+	// filter iterate through each item of the array
 
 	const completedItems = todoItems.filter((item) => item.checked === true);
 	for (const item of completedItems) {
@@ -46,10 +46,10 @@ function completeList() {
 	}
 }
 
-//list uncompleted todos
+// list uncompleted todos
 function uncompletedList() {
 	/*
-	 *filter is an array method that returns the position of an element in the array
+	 * filter is an array method that returns the position of an element in the array
 	 */
 
 	const uncompletedItems = todoItems.filter((item) => item.checked === false);
@@ -57,7 +57,7 @@ function uncompletedList() {
 		console.log(item.id + " " + item.text);
 	}
 }
-//for user to write the text of the item they want to remove since they dont know abou the id
+// for user to write the text of the item they want to remove since they dont know abou the id
 function findTodoByText(text: string) {
 	// find the text that matches the text  inside the array
 	const findTodoWithText = todoItems.findIndex(
@@ -73,7 +73,7 @@ function removeTodoByText(text: string) {
 }
 
 function removeTodo(itemsToRemove: any[number]) {
-	// find the index of the todo with the id you are looking for and return the item not the index itself
+	// find the index of the todo with the id you are looking for and return index itself
 	const indexOfTodoToDelete = todoItems.findIndex(
 		(todoInArray: { id: any }) => todoInArray.id === itemsToRemove.id
 	);
@@ -93,5 +93,5 @@ export {
 	uncompletedList,
 	removeTodo,
 	clearAll,
-	getTestItems as testItems,
+	getTestItems,
 };

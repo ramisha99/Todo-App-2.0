@@ -7,7 +7,7 @@ import {
 	todoItems,
 } from "./todo_final";
 
-/* Runs before each test */
+// Runs before each test *
 beforeEach(() => {
 	clearAll();
 });
@@ -18,7 +18,7 @@ afterEach(() => {
 	console.log = originalLog;
 });
 
-//test for addtodo
+// test for addtodo
 test("add a todo item to the list of todoItems", () => {
 	addTodo("buy apple", "6/30/21");
 	console.log(todoItems);
@@ -27,7 +27,7 @@ test("add a todo item to the list of todoItems", () => {
 	expect(todoItems[0].text).toEqual("buy apple"); //index[0] since it is a test
 });
 
-//test for remove item
+// test for remove item
 test("remove an item", () => {
 	todoItems.push(
 		{
@@ -47,14 +47,14 @@ test("remove an item", () => {
 		}
 	);
 
-	removeTodo(todoItems[0]); //testing if we can remove the 1st item or  not
+	removeTodo(todoItems[0]); // testing if we can remove the 1st item or  not
 	console.log(todoItems);
 	expect(todoItems.length).toEqual(1);
 	console.log(todoItems);
 	expect(todoItems[0].text).toEqual("ramisha");
 });
 
-//test for clearAll todos
+// test for clearAll todos
 test("clearing the todoItems array", () => {
 	todoItems.push(
 		{
@@ -77,7 +77,7 @@ test("clearing the todoItems array", () => {
 	expect(todoItems.length).toBe(0);
 });
 
-//test for Complete List
+// test for Complete List
 test("view the complete list of todos", () => {
 	console.log = jest.fn();
 
@@ -109,7 +109,7 @@ test("view the complete list of todos", () => {
 	expect(console.log).toHaveBeenCalledTimes(1);
 });
 
-//test for uncompleted Items list
+// test for uncompleted Items list
 test("view the uncomplete list of todos", () => {
 	console.log = jest.fn();
 	todoItems.push(
