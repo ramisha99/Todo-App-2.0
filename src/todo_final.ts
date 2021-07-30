@@ -11,6 +11,7 @@ function listAllTodos() {
 	for (const item of todoItems) {
 		console.log(item.id + " " + item.text);
 	}
+	return todoItems;
 }
 
 /*
@@ -24,11 +25,11 @@ function addTodo(text: any, dueAtstr: string) {
 		createdAt: new Date(), //it will be the current date when the todo is created
 		dueAt: new Date(dueAtstr), //string to date
 		id: Date.now(), //The static Date.now() method returns the number of milliseconds elapsed since January 1, 1970
-		text, //key and value both are text
+		text, // key and value both are text
 	};
 
 	todoItems.push(todo);
-	return todo.id;
+	return todo;
 }
 //getter
 function getTestItems() {
@@ -44,6 +45,23 @@ function completeList() {
 	for (const item of completedItems) {
 		console.log(item.id + " " + item.text);
 	}
+	return completedItems;
+}
+
+// mark a do item as done
+// find returns an object filter returns an array
+function markTodoAsDone(userId: number) {
+	console.log(todoItems);
+	for (const item of todoItems) {
+		// check if user input matches or not
+		if (item.id === userId) {
+			item.checked = true;
+			// when it matches return this
+			return "Successful";
+		}
+	}
+	// after looping through each item then print this
+	return "Error, Please provide item from the list";
 }
 
 // list uncompleted todos
@@ -51,25 +69,26 @@ function uncompletedList() {
 	/*
 	 * filter is an array method that returns the position of an element in the array
 	 */
-
 	const uncompletedItems = todoItems.filter((item) => item.checked === false);
 	for (const item of uncompletedItems) {
 		console.log(item.id + " " + item.text);
 	}
+	return uncompletedItems;
 }
+
 // for user to write the text of the item they want to remove since they dont know abou the id
 function findTodoByText(text: string) {
-	// find the text that matches the text  inside the array
+	// find the index where the  text that matches the text  inside the array
 	const findTodoWithText = todoItems.findIndex(
 		(todoInsideArray) => todoInsideArray.text === text
 	);
-	return todoItems[findTodoWithText]; //return the item not the text itself
+	return todoItems[findTodoWithText]; // return the item not the text itself
 }
 
 // remove todo by text
 
 function removeTodoByText(text: string) {
-	removeTodo(findTodoByText(text));
+	return removeTodo(findTodoByText(text));
 }
 
 function removeTodo(itemsToRemove: any[number]) {
@@ -79,6 +98,7 @@ function removeTodo(itemsToRemove: any[number]) {
 	);
 	// remove that todo
 	todoItems.splice(indexOfTodoToDelete, 1); // delete the todo
+	return itemsToRemove.id;
 }
 
 function clearAll() {
@@ -94,4 +114,7 @@ export {
 	removeTodo,
 	clearAll,
 	getTestItems,
+	removeTodoByText,
+	findTodoByText,
+	markTodoAsDone,
 };
