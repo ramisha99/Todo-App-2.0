@@ -1,16 +1,13 @@
 import {
 	addTodo,
-	removeTodo,
 	listAllTodos,
 	markTodoAsDone,
+	removeTodoById,
 } from "./todo_final";
-
-// for req.body
-const bodyParser = require("body-parser");
 
 // require the just installed express app
 const express = require("express");
-const path = require("path");
+
 // then we call express
 const app = express();
 // json express convention
@@ -27,14 +24,24 @@ app.post("/", function (req: any, res: any) {
 });
 
 // Put @ /{id}/done - marks a todo as done and returns a HTTP status code to indicate success/failure.
+// parseInt required as reqest are mostly string
 app.put("/:id/done", function (req: any, res: any) {
-	console.log(typeof req.params.id);
-	res.send(markTodoAsDone(parseInt(req.params.id)));
+	let result = markTodoAsDone(parseInt(req.params.id)); //positional so userid wont work
+	if (result === true) {
+		res.status(200).end(); //chaining//json,send,end goes to client not status
+	} else {
+		res.status(400).end();
+	}
 });
 
 // Delete @ /{id} - delete a todo item. Returns the deleted object and the appropriate HTTP status code.
 app.delete("/:id", function (req: any, res: any) {
-	res.send(removeTodo(req.params.id));
+	try {
+		res.json(removeTodoById(parseInt(req.params.id)));
+		res.status(200).end(); //chaining//json,send,end goes to client not status
+	} catch (e) {
+		res.status(404).end();
+	}
 });
 
 // the server is listening on port 8080 for connections

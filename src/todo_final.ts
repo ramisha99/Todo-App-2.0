@@ -19,7 +19,7 @@ function listAllTodos() {
  * text that was entered in the text input, and push it into
  * the `todoItems` array
  */
-function addTodo(text: any, dueAtstr: string) {
+function addTodo(text: string, dueAtstr: string) {
 	let todo = {
 		checked: false,
 		createdAt: new Date(), //it will be the current date when the todo is created
@@ -51,17 +51,16 @@ function completeList() {
 // mark a do item as done
 // find returns an object filter returns an array
 function markTodoAsDone(userId: number) {
-	console.log(todoItems);
 	for (const item of todoItems) {
 		// check if user input matches or not
 		if (item.id === userId) {
 			item.checked = true;
 			// when it matches return this
-			return "Successful";
+			return true;
 		}
 	}
 	// after looping through each item then print this
-	return "Error, Please provide item from the list";
+	return false;
 }
 
 // list uncompleted todos
@@ -84,21 +83,36 @@ function findTodoByText(text: string) {
 	);
 	return todoItems[findTodoWithText]; // return the item not the text itself
 }
+function findTodoById(id: number) {
+	// find the index where the  text that matches the text  inside the array
+	const findTodoWithId = todoItems.findIndex(
+		(todoInsideArray) => todoInsideArray.id === id
+	);
+	return todoItems[findTodoWithId]; // return the item not the text itself
+}
 
 // remove todo by text
 
 function removeTodoByText(text: string) {
 	return removeTodo(findTodoByText(text));
 }
+// remove todo by user Id
+function removeTodoById(id: number) {
+	return removeTodo(findTodoById(id)); //returns the return val of removeTodo
+}
 
-function removeTodo(itemsToRemove: any[number]) {
+function removeTodo(itemsToRemove: TodoItem) {
+	if (itemsToRemove === undefined) {
+		throw new Error("Item is undefined"); //class
+	}
 	// find the index of the todo with the id you are looking for and return index itself
+
 	const indexOfTodoToDelete = todoItems.findIndex(
-		(todoInArray: { id: any }) => todoInArray.id === itemsToRemove.id
+		(todoInArray: { id: any }) => todoInArray.id === itemsToRemove.id // can be undefined
 	);
 	// remove that todo
 	todoItems.splice(indexOfTodoToDelete, 1); // delete the todo
-	return itemsToRemove.id;
+	return itemsToRemove;
 }
 
 function clearAll() {
@@ -117,4 +131,6 @@ export {
 	removeTodoByText,
 	findTodoByText,
 	markTodoAsDone,
+	findTodoById,
+	removeTodoById,
 };
