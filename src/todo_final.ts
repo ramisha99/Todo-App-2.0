@@ -101,18 +101,18 @@ function removeTodoById(id: number) {
 	return removeTodo(findTodoById(id)); //returns the return val of removeTodo
 }
 
-function removeTodo(itemsToRemove: TodoItem) {
-	if (itemsToRemove === undefined) {
+function removeTodo(itemToRemove: TodoItem) {
+	if (itemToRemove === undefined) {
 		throw new Error("Item is undefined"); //class
 	}
 	// find the index of the todo with the id you are looking for and return index itself
 
 	const indexOfTodoToDelete = todoItems.findIndex(
-		(todoInArray: { id: any }) => todoInArray.id === itemsToRemove.id // can be undefined
+		(todoInArray: { id: any }) => todoInArray.id === itemToRemove.id // can be undefined
 	);
 	// remove that todo
 	todoItems.splice(indexOfTodoToDelete, 1); // delete the todo
-	return itemsToRemove;
+	return itemToRemove;
 }
 
 function clearAll() {

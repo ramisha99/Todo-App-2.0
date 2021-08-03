@@ -37,8 +37,7 @@ app.put("/:id/done", function (req: any, res: any) {
 // Delete @ /{id} - delete a todo item. Returns the deleted object and the appropriate HTTP status code.
 app.delete("/:id", function (req: any, res: any) {
 	try {
-		res.json(removeTodoById(parseInt(req.params.id)));
-		res.status(200).end(); //chaining//json,send,end goes to client not status
+		res.json(removeTodoById(parseInt(req.params.id))); //chaining json,send,end goes to client not status
 	} catch (e) {
 		res.status(404).end();
 	}
