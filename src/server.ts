@@ -27,7 +27,7 @@ app.post("/", function (req: any, res: any) {
 // parseInt required as reqest are mostly string
 app.put("/:id/done", function (req: any, res: any) {
 	let result = markTodoAsDone(parseInt(req.params.id)); //positional so userid wont work
-	if (result === true) {
+	if (result) {
 		res.status(200).end(); //chaining//json,send,end goes to client not status
 	} else {
 		res.status(400).end();
@@ -37,7 +37,7 @@ app.put("/:id/done", function (req: any, res: any) {
 // Delete @ /{id} - delete a todo item. Returns the deleted object and the appropriate HTTP status code.
 app.delete("/:id", function (req: any, res: any) {
 	try {
-		res.json(removeTodoById(parseInt(req.params.id))); //chaining json,send,end goes to client not status
+		res.json(removeTodoById(parseInt(req.params.id))); //chaining json,send,end goes to client not status, will return 200 status code by default
 	} catch (e) {
 		res.status(404).end();
 	}

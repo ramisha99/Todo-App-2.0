@@ -5,8 +5,8 @@ type TodoItem = {
 	id: number;
 	text: string;
 };
-let todoItems: TodoItem[] = [];
 // this array will contain all the todo list items
+let todoItems: TodoItem[] = [];
 function listAllTodos() {
 	for (const item of todoItems) {
 		console.log(item.id + " " + item.text);
@@ -30,10 +30,6 @@ function addTodo(text: string, dueAtstr: string) {
 
 	todoItems.push(todo);
 	return todo;
-}
-//getter
-function getTestItems() {
-	return todoItems;
 }
 
 // list completed task
@@ -59,7 +55,7 @@ function markTodoAsDone(userId: number) {
 			return true;
 		}
 	}
-	// after looping through each item then print this
+	// after finishing looping through each item get out of the loop and return false meaning item userinput did not match any item in the list
 	return false;
 }
 
@@ -68,11 +64,16 @@ function uncompletedList() {
 	/*
 	 * filter is an array method that returns the position of an element in the array
 	 */
-	const uncompletedItems = todoItems.filter((item) => item.checked === false);
+	let uncompletedItems = todoItems.filter((item) => item.checked === false);
 	for (const item of uncompletedItems) {
 		console.log(item.id + " " + item.text);
 	}
 	return uncompletedItems;
+}
+
+//getter
+function getUncompletedItems() {
+	return uncompletedList();
 }
 
 // for user to write the text of the item they want to remove since they dont know abou the id
@@ -127,10 +128,10 @@ export {
 	uncompletedList,
 	removeTodo,
 	clearAll,
-	getTestItems,
 	removeTodoByText,
 	findTodoByText,
 	markTodoAsDone,
 	findTodoById,
 	removeTodoById,
+	getUncompletedItems,
 };

@@ -5,6 +5,7 @@ import {
 	completeList,
 	uncompletedList,
 	todoItems,
+	getUncompletedItems,
 } from "./todo_final";
 
 // Runs before each test *
@@ -21,7 +22,6 @@ afterEach(() => {
 // test for addtodo
 test("add a todo item to the list of todoItems", () => {
 	addTodo("buy apple", "6/30/21");
-	console.log(todoItems);
 	const length = todoItems.length;
 	expect(length).toEqual(1); //length of one item that is being newly added
 	expect(todoItems[0].text).toEqual("buy apple"); //index[0] since it is a test
@@ -48,9 +48,7 @@ test("remove an item", () => {
 	);
 
 	removeTodo(todoItems[0]); // testing if we can remove the 1st item or  not
-	console.log(todoItems);
 	expect(todoItems.length).toEqual(1);
-	console.log(todoItems);
 	expect(todoItems[0].text).toEqual("ramisha");
 });
 
@@ -73,25 +71,26 @@ test("clearing the todoItems array", () => {
 		}
 	);
 	clearAll();
-	console.log(todoItems);
+
 	expect(todoItems.length).toBe(0);
 });
 
 // test for Complete List
-test("view the complete list of todos", () => {
+test("view the completed list of todos", () => {
+	//mocking console log
 	console.log = jest.fn();
 
 	todoItems.push(
 		{
 			text: "apple",
-			checked: true,
+			checked: false,
 			id: 1500,
 			createdAt: new Date("6/20/2021"),
 			dueAt: new Date("12/20/2021"),
 		},
 		{
 			text: "dog",
-			checked: false,
+			checked: true,
 			id: 1600,
 			createdAt: new Date("8/20/2021"),
 			dueAt: new Date("11/20/2021"),
@@ -107,11 +106,14 @@ test("view the complete list of todos", () => {
 
 	completeList();
 	expect(console.log).toHaveBeenCalledTimes(1);
+	let completedItems = completeList();
+	expect(completedItems[0].text).toEqual("dog");
 });
 
 // test for uncompleted Items list
-test("view the uncomplete list of todos", () => {
+test("view the uncompleted list of todos", () => {
 	console.log = jest.fn();
+
 	todoItems.push(
 		{
 			text: "mango",
@@ -122,13 +124,13 @@ test("view the uncomplete list of todos", () => {
 		},
 		{
 			text: "banana",
-			checked: true,
+			checked: false,
 			id: 1200,
 			createdAt: new Date("2/20/2020"),
 			dueAt: new Date("10/20/2020"),
 		},
 		{
-			text: "bangladesh",
+			text: "Lawrence",
 			checked: false,
 			id: 2000,
 			createdAt: new Date("3/20/2020"),
@@ -137,5 +139,8 @@ test("view the uncomplete list of todos", () => {
 	);
 
 	uncompletedList();
-	expect(console.log).toHaveBeenCalledTimes(1);
+	expect(console.log).toHaveBeenCalledTimes(2);
+	let uncompletedItems = uncompletedList();
+	expect(uncompletedItems[1].text).toBe("Lawrence");
+	expect(uncompletedItems[0].text).toBe("banana");
 });
